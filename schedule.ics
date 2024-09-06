@@ -1,697 +1,588 @@
 BEGIN:VCALENDAR
 BEGIN:VEVENT
-SUMMARY:Вычислительные машины\, сети и систе
- мы (Лекционные)\nМикитенко И. И.
-DTSTART:20240902T105000
-DTEND:20240902T113500
+SUMMARY:Основы российской государственност
+ и (Практические)\nБарсукова А. В.
+DTSTART:20240902T090000
+DTEND:20240902T103500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Вычислительные машины\, сети и сис
- темы (Лекционные)\nМикитенко И. И. - Л-550 \nВ
- ерхняя неделя
-LOCATION:Л-550
+COLOR:green
+LOCATION:А-510
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Вычислительные машины\, сети и систе
- мы (Лекционные)\nМикитенко И. И.
-DTSTART:20240902T114000
+ мы (Лекционные)\nВолошиновский К. И.
+DTSTART:20240902T105000
 DTEND:20240902T122500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Вычислительные машины\, сети и сис
- темы (Лекционные)\nМикитенко И. И. - Л-550 \nВ
- ерхняя неделя
+COLOR:orange
 LOCATION:Л-550
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Основы российской государственност
- и (Практические)\nБарсукова А. В.
-DTSTART:20240902T124000
-DTEND:20240902T132500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Основы российской государственно
- сти (Практические)\nБарсукова А. В. - А-510 \n
- Верхняя неделя
-LOCATION:А-510
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:История России (Лекционные)\nАристов
-  А. В.
-DTSTART:20240902T133000
-DTEND:20240902T141500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:История России (Лекционные)\nАрист
- ов А. В. - Л-746 \nВерхняя неделя
-LOCATION:Л-746
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Основы российской государственност
- и (Практические)\nБарсукова А. В.
-DTSTART:20240902T152000
-DTEND:20240902T160500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Основы российской государственно
- сти (Практические)\nБарсукова А. В. - А-510 \n
- Верхняя неделя
-LOCATION:А-510
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Математика (Практические)\nВакансия 
- 2 К. .
+SUMMARY:Математика (Практические)\nБелоконь 
+ А. И.
 DTSTART:20240903T105000
-DTEND:20240903T113500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Математика (Практические)\nВаканс
- ия 2 К. . - А-526 \nВерхняя неделя
-LOCATION:А-526
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Математика (Практические)\nВакансия 
- 2 К. .
-DTSTART:20240903T114000
 DTEND:20240903T122500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Математика (Практические)\nВаканс
- ия 2 К. . - А-526 \nВерхняя неделя
+COLOR:green
 LOCATION:А-526
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Математика (Лекционные)\nТюленева О. 
  Н.
 DTSTART:20240903T124000
-DTEND:20240903T132500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Математика (Лекционные)\nТюленева 
- О. Н. - Л-518 \nВерхняя неделя
-LOCATION:Л-518
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Математика (Лекционные)\nТюленева О. 
- Н.
-DTSTART:20240903T133000
 DTEND:20240903T141500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Математика (Лекционные)\nТюленева 
- О. Н. - Л-518 \nВерхняя неделя
+COLOR:orange
 LOCATION:Л-518
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Иностранный язык (Практические)\n
 DTSTART:20240903T143000
-DTEND:20240903T151500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Иностранный язык (Практические)\n -
-  Каф. ИЯКТ \nВерхняя неделя
-LOCATION:Каф. ИЯКТ
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Иностранный язык (Практические)\n
-DTSTART:20240903T152000
 DTEND:20240903T160500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Иностранный язык (Практические)\n -
-  Каф. ИЯКТ \nВерхняя неделя
+COLOR:green
 LOCATION:Каф. ИЯКТ
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Введение в специальность (Практичес
  кие)\nВакансия 4 К. .
 DTSTART:20240903T162000
-DTEND:20240903T170500
+DTEND:20240903T175500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Введение в специальность (Практич
- еские)\nВакансия 4 К. . - Б-529 \nВерхняя недел
- я
+COLOR:green
 LOCATION:Б-529
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Программирование и алгоритмизация (
  Лекционные)\nКружкова Г. В.
 DTSTART:20240904T105000
-DTEND:20240904T113500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Программирование и алгоритмизаци
- я (Лекционные)\nКружкова Г. В. - Б-934 \nВерхн
- яя неделя
-LOCATION:Б-934
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Программирование и алгоритмизация (
- Лекционные)\nКружкова Г. В.
-DTSTART:20240904T114000
 DTEND:20240904T122500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Программирование и алгоритмизаци
- я (Лекционные)\nКружкова Г. В. - Б-934 \nВерхн
- яя неделя
+COLOR:orange
 LOCATION:Б-934
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:1 п.г. Программирование и алгоритмиз
  ация (Лабораторные)\nКружкова Г. В.
 DTSTART:20240904T124000
-DTEND:20240904T132500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#3357FF
-DESCRIPTION:1 п.г. Программирование и алгоритм
- изация (Лабораторные)\nКружкова Г. В. - Г-529
- -УВЦ \nВерхняя неделя
-LOCATION:Г-529-УВЦ
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:1 п.г. Программирование и алгоритмиз
- ация (Лабораторные)\nКружкова Г. В.
-DTSTART:20240904T133000
 DTEND:20240904T141500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#3357FF
-DESCRIPTION:1 п.г. Программирование и алгоритм
- изация (Лабораторные)\nКружкова Г. В. - Г-514
- -УВЦ \nВерхняя неделя
-LOCATION:Г-514-УВЦ
+COLOR:blue
+LOCATION:Б-823-УВЦ
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Математика (Практические)\nДанченко
  в И. В.
 DTSTART:20240904T143000
-DTEND:20240904T151500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Математика (Практические)\nДанчен
- ков И. В. - А-510 \nВерхняя неделя
-LOCATION:А-510
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Математика (Практические)\nДанченко
- в И. В.
-DTSTART:20240904T152000
 DTEND:20240904T160500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Математика (Практические)\nДанчен
- ков И. В. - А-510 \nВерхняя неделя
+COLOR:green
 LOCATION:А-510
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Введение в специальность (Лекционны
  е)\nБелых П. В.
 DTSTART:20240904T162000
-DTEND:20240904T170500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Введение в специальность (Лекцион
- ные)\nБелых П. В. - Б-934 \nВерхняя неделя
-LOCATION:Б-934
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Введение в специальность (Лекционны
- е)\nБелых П. В.
-DTSTART:20240904T171000
 DTEND:20240904T175500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Введение в специальность (Лекцион
- ные)\nБелых П. В. - Б-934 \nВерхняя неделя
+COLOR:orange
 LOCATION:Б-934
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Математика (Лекционные)\nДанченков И
  . В.
 DTSTART:20240905T105000
-DTEND:20240905T113500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Математика (Лекционные)\nДанченко
- в И. В. - Г-313 \nВерхняя неделя
-LOCATION:Г-313
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Математика (Лекционные)\nДанченков И
- . В.
-DTSTART:20240905T114000
 DTEND:20240905T122500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Математика (Лекционные)\nДанченко
- в И. В. - Л-550 \nВерхняя неделя
-LOCATION:Л-550
+COLOR:orange
+LOCATION:Г-313
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:История России (Лекционные)\nАристов
   А. В.
 DTSTART:20240905T124000
-DTEND:20240905T132500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:История России (Лекционные)\nАрист
- ов А. В. - К-313 \nВерхняя неделя
-LOCATION:К-313
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:История России (Лекционные)\nАристов
-  А. В.
-DTSTART:20240905T133000
 DTEND:20240905T141500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:История России (Лекционные)\nАрист
- ов А. В. - К-313 \nВерхняя неделя
+COLOR:orange
 LOCATION:К-313
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Иностранный язык (Практические)\n
 DTSTART:20240905T143000
-DTEND:20240905T151500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Иностранный язык (Практические)\n -
-  Каф. ИЯКТ \nВерхняя неделя
-LOCATION:Каф. ИЯКТ
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Иностранный язык (Практические)\n
-DTSTART:20240905T152000
 DTEND:20240905T160500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Иностранный язык (Практические)\n -
-  Каф. ИЯКТ \nВерхняя неделя
+COLOR:green
 LOCATION:Каф. ИЯКТ
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:1 п.г. Вычислительные машины\, сети и 
- системы (Лабораторные)\n
+ системы (Лабораторные)\nВолошиновский К. 
+ И.
 DTSTART:20240906T105000
-DTEND:20240906T113500
+DTEND:20240906T122500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#3357FF
-DESCRIPTION:1 п.г. Вычислительные машины\, сети 
- и системы (Лабораторные)\n - Л-542-УВЦ \nВерх
- няя неделя
+COLOR:blue
 LOCATION:Л-542-УВЦ
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Математика (Практические)\nВакансия 
- 2 К. .
+SUMMARY:Математика (Практические)\nБелоконь 
+ А. И.
 DTSTART:20240906T124000
-DTEND:20240906T132500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Математика (Практические)\nВаканс
- ия 2 К. . - Л-631 \nВерхняя неделя
-LOCATION:Л-631
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Основы российской государственност
- и (Лекционные)\nАристов А. В.
-DTSTART:20240906T133000
 DTEND:20240906T141500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Основы российской государственно
- сти (Лекционные)\nАристов А. В. - К-214 \nВерх
- няя неделя
-LOCATION:К-214
+COLOR:green
+LOCATION:Л-631
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:История России (Практические)\nБолот
  ова О. В.
 DTSTART:20240906T143000
-DTEND:20240906T151500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:История России (Практические)\nБол
- отова О. В. - К-526 \nВерхняя неделя
-LOCATION:К-526
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Математика (Практические)\nВакансия 
- 2 К. .
-DTSTART:20240906T152000
 DTEND:20240906T160500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Математика (Практические)\nВаканс
- ия 2 К. . - Л-631 \nВерхняя неделя
-LOCATION:Л-631
+COLOR:green
+LOCATION:К-526
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Вычислительные машины\, сети и систе
- мы (Лекционные)\nМикитенко И. И.
+ мы (Лекционные)\nВолошиновский К. И.
 DTSTART:20240909T105000
-DTEND:20240909T113500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Вычислительные машины\, сети и сис
- темы (Лекционные)\nМикитенко И. И. - Л-550 \nН
- ижняя неделя
-LOCATION:Л-550
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Вычислительные машины\, сети и систе
- мы (Лекционные)\nМикитенко И. И.
-DTSTART:20240909T114000
 DTEND:20240909T122500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Вычислительные машины\, сети и сис
- темы (Лекционные)\nМикитенко И. И. - Л-550 \nН
- ижняя неделя
+COLOR:orange
 LOCATION:Л-550
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Основы российской государственност
- и (Практические)\nБарсукова А. В.
-DTSTART:20240909T124000
-DTEND:20240909T132500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Основы российской государственно
- сти (Практические)\nБарсукова А. В. - А-510 \n
- Нижняя неделя
-LOCATION:А-510
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:История России (Лекционные)\nАристов
   А. В.
-DTSTART:20240909T133000
+DTSTART:20240909T124000
 DTEND:20240909T141500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:История России (Лекционные)\nАрист
- ов А. В. - Л-746 \nНижняя неделя
+COLOR:orange
 LOCATION:Л-746
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Основы российской государственност
  и (Практические)\nБарсукова А. В.
-DTSTART:20240909T152000
+DTSTART:20240909T143000
 DTEND:20240909T160500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Основы российской государственно
- сти (Практические)\nБарсукова А. В. - А-510 \n
- Нижняя неделя
+COLOR:green
 LOCATION:А-510
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Математика (Практические)\nВакансия 
- 2 К. .
+SUMMARY:Математика (Практические)\nБелоконь 
+ А. И.
 DTSTART:20240910T105000
-DTEND:20240910T113500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Математика (Практические)\nВаканс
- ия 2 К. . - А-526 \nНижняя неделя
-LOCATION:А-526
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Математика (Практические)\nВакансия 
- 2 К. .
-DTSTART:20240910T114000
 DTEND:20240910T122500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Математика (Практические)\nВаканс
- ия 2 К. . - А-526 \nНижняя неделя
+COLOR:green
 LOCATION:А-526
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Математика (Лекционные)\nТюленева О. 
  Н.
 DTSTART:20240910T124000
-DTEND:20240910T132500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Математика (Лекционные)\nТюленева 
- О. Н. - Л-518 \nНижняя неделя
-LOCATION:Л-518
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Математика (Лекционные)\nТюленева О. 
- Н.
-DTSTART:20240910T133000
 DTEND:20240910T141500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Математика (Лекционные)\nТюленева 
- О. Н. - Л-518 \nНижняя неделя
+COLOR:orange
 LOCATION:Л-518
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Иностранный язык (Практические)\n
 DTSTART:20240910T143000
-DTEND:20240910T151500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Иностранный язык (Практические)\n -
-  Каф. ИЯКТ \nНижняя неделя
-LOCATION:Каф. ИЯКТ
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Иностранный язык (Практические)\n
-DTSTART:20240910T152000
 DTEND:20240910T160500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Иностранный язык (Практические)\n -
-  Каф. ИЯКТ \nНижняя неделя
+COLOR:green
 LOCATION:Каф. ИЯКТ
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Введение в специальность (Практичес
- кие)\nВакансия 4 К. .
-DTSTART:20240910T162000
-DTEND:20240910T170500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Введение в специальность (Практич
- еские)\nВакансия 4 К. . - Б-529 \nНижняя неделя
-LOCATION:Б-529
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Программирование и алгоритмизация (
  Лекционные)\nКружкова Г. В.
 DTSTART:20240911T105000
-DTEND:20240911T113500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Программирование и алгоритмизаци
- я (Лекционные)\nКружкова Г. В. - Б-934 \nНижня
- я неделя
-LOCATION:Б-934
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Программирование и алгоритмизация (
- Лекционные)\nКружкова Г. В.
-DTSTART:20240911T114000
 DTEND:20240911T122500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Программирование и алгоритмизаци
- я (Лекционные)\nКружкова Г. В. - Б-934 \nНижня
- я неделя
+COLOR:orange
 LOCATION:Б-934
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:2 п.г. Программирование и алгоритмиз
+SUMMARY:1 п.г. Программирование и алгоритмиз
  ация (Лабораторные)\nКружкова Г. В.
 DTSTART:20240911T124000
-DTEND:20240911T132500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#3357FF
-DESCRIPTION:2 п.г. Программирование и алгоритм
- изация (Лабораторные)\nКружкова Г. В. - Г-529
- -УВЦ \nНижняя неделя
-LOCATION:Г-529-УВЦ
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:2 п.г. Программирование и алгоритмиз
- ация (Лабораторные)\nКружкова Г. В.
-DTSTART:20240911T133000
 DTEND:20240911T141500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#3357FF
-DESCRIPTION:2 п.г. Программирование и алгоритм
- изация (Лабораторные)\nКружкова Г. В. - Г-514
- -УВЦ \nНижняя неделя
-LOCATION:Г-514-УВЦ
+COLOR:blue
+LOCATION:Б-823-УВЦ
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Математика (Практические)\nДанченко
  в И. В.
 DTSTART:20240911T143000
-DTEND:20240911T151500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Математика (Практические)\nДанчен
- ков И. В. - А-510 \nНижняя неделя
-LOCATION:А-510
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Математика (Практические)\nДанченко
- в И. В.
-DTSTART:20240911T152000
 DTEND:20240911T160500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Математика (Практические)\nДанчен
- ков И. В. - А-510 \nНижняя неделя
+COLOR:green
 LOCATION:А-510
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Введение в специальность (Лекционны
  е)\nБелых П. В.
 DTSTART:20240911T162000
-DTEND:20240911T170500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Введение в специальность (Лекцион
- ные)\nБелых П. В. - Б-934 \nНижняя неделя
-LOCATION:Б-934
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Введение в специальность (Лекционны
- е)\nБелых П. В.
-DTSTART:20240911T171000
 DTEND:20240911T175500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Введение в специальность (Лекцион
- ные)\nБелых П. В. - Б-934 \nНижняя неделя
+COLOR:orange
 LOCATION:Б-934
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Математика (Лекционные)\nДанченков И
  . В.
 DTSTART:20240912T105000
-DTEND:20240912T113500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Математика (Лекционные)\nДанченко
- в И. В. - Г-313 \nНижняя неделя
-LOCATION:Г-313
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Математика (Лекционные)\nДанченков И
- . В.
-DTSTART:20240912T114000
 DTEND:20240912T122500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Математика (Лекционные)\nДанченко
- в И. В. - Л-550 \nНижняя неделя
+COLOR:orange
 LOCATION:Л-550
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:История России (Лекционные)\nАристов
   А. В.
 DTSTART:20240912T124000
-DTEND:20240912T132500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:История России (Лекционные)\nАрист
- ов А. В. - К-313 \nНижняя неделя
-LOCATION:К-313
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:История России (Лекционные)\nАристов
-  А. В.
-DTSTART:20240912T133000
 DTEND:20240912T141500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:История России (Лекционные)\nАрист
- ов А. В. - К-313 \nНижняя неделя
+COLOR:orange
 LOCATION:К-313
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Иностранный язык (Практические)\n
 DTSTART:20240912T143000
-DTEND:20240912T151500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Иностранный язык (Практические)\n -
-  Каф. ИЯКТ \nНижняя неделя
-LOCATION:Каф. ИЯКТ
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Иностранный язык (Практические)\n
-DTSTART:20240912T152000
 DTEND:20240912T160500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Иностранный язык (Практические)\n -
-  Каф. ИЯКТ \nНижняя неделя
+COLOR:green
 LOCATION:Каф. ИЯКТ
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:2 п.г. Вычислительные машины\, сети и 
- системы (Лабораторные)\n
-DTSTART:20240913T105000
-DTEND:20240913T113500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#3357FF
-DESCRIPTION:2 п.г. Вычислительные машины\, сети 
- и системы (Лабораторные)\n - Л-542-УВЦ \nНижн
- яя неделя
-LOCATION:Л-542-УВЦ
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Математика (Практические)\nВакансия 
- 2 К. .
-DTSTART:20240913T124000
-DTEND:20240913T132500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Математика (Практические)\nВаканс
- ия 2 К. . - Л-631 \nНижняя неделя
-LOCATION:Л-631
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Основы российской государственност
  и (Лекционные)\nАристов А. В.
-DTSTART:20240913T133000
+DTSTART:20240913T124000
 DTEND:20240913T141500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#FF5733
-DESCRIPTION:Основы российской государственно
- сти (Лекционные)\nАристов А. В. - К-214 \nНижн
- яя неделя
+COLOR:orange
 LOCATION:К-214
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:История России (Практические)\nБолот
- ова О. В.
+SUMMARY:Математика (Практические)\nБелоконь 
+ А. И.
 DTSTART:20240913T143000
-DTEND:20240913T151500
-RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:История России (Практические)\nБол
- отова О. В. - К-526 \nНижняя неделя
-LOCATION:К-526
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Математика (Практические)\nВакансия 
- 2 К. .
-DTSTART:20240913T152000
 DTEND:20240913T160500
 RRULE:FREQ=WEEKLY;INTERVAL=2
-COLOR:#33FF57
-DESCRIPTION:Математика (Практические)\nВаканс
- ия 2 К. . - Л-631 \nНижняя неделя
+COLOR:green
 LOCATION:Л-631
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 15 минут
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Уведомление за 5 минут
+TRIGGER:-PT5M
+END:VALARM
 END:VEVENT
 END:VCALENDAR
