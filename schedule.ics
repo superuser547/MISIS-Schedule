@@ -93,7 +93,7 @@ RRULE:FREQ=WEEKLY;INTERVAL=2
 COLOR:green
 DESCRIPTION:Иностранный язык (Практические)\n\,
   \nКаф. ИЯКТ\, \nВерхняя неделя
-LOCATION:Каф. ИЯКТ
+LOCATION:Г-460
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Уведомление за 15 минут
@@ -263,7 +263,7 @@ RRULE:FREQ=WEEKLY;INTERVAL=2
 COLOR:green
 DESCRIPTION:Иностранный язык (Практические)\n\,
   \nКаф. ИЯКТ\, \nВерхняя неделя
-LOCATION:Каф. ИЯКТ
+LOCATION:Г-473
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Уведомление за 15 минут
@@ -455,7 +455,7 @@ RRULE:FREQ=WEEKLY;INTERVAL=2
 COLOR:green
 DESCRIPTION:Иностранный язык (Практические)\n\,
   \nКаф. ИЯКТ\, \nНижняя неделя
-LOCATION:Каф. ИЯКТ
+LOCATION:Г-460
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Уведомление за 15 минут
@@ -603,7 +603,7 @@ RRULE:FREQ=WEEKLY;INTERVAL=2
 COLOR:green
 DESCRIPTION:Иностранный язык (Практические)\n\,
   \nКаф. ИЯКТ\, \nНижняя неделя
-LOCATION:Каф. ИЯКТ
+LOCATION:Г-473
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Уведомление за 15 минут

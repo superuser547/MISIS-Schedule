@@ -6,7 +6,7 @@ from icalendar import Calendar, Event, Alarm
 # Настройки
 group_name = "ББИ-24-3"
 sheet_name = "1 курс"
-schedule_file_url = "https://misis.ru/files/-/798a1a0867c304682fa7fcd52b50ec0a/ikn_060924.xlsx"
+schedule_file_url = "https://misis.ru/files/-/715c2b5e46318098d84f36722b9532dd/10924_ikn.xlsx"
 # schedule_file_path = "ikn_300824.xlsx"
 
 df = pd.read_excel(schedule_file_url, sheet_name=sheet_name)
@@ -152,7 +152,19 @@ def create_event(cal, subject, description, location, start, end):
     event = Event()
     event.add('summary', subject)
     event.add('description', description)
+
+    # Проверяем день недели и изменяем локацию, если она указана как "Каф. ИЯКТ"
+    day_of_week = start.weekday()  # 0 - понедельник, 1 - вторник, ..., 6 - воскресенье
+    if location == "Каф. ИЯКТ":
+        if day_of_week == 1:  # Вторник
+            location = "Г-460"
+        elif day_of_week == 3:  # Четверг
+            location = "Г-473"
+        else:
+            raise ValueError("Ошибка при автоматической замене аудитории для Английского языка. Проверьте настройки")
+    
     event.add('location', location)
+
     event.add('dtstart', start)
     event.add('dtend', end)
     
