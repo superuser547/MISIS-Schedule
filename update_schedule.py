@@ -4,10 +4,21 @@ from datetime import datetime, timedelta
 from icalendar import Calendar, Event, Alarm
 
 # Настройки
-group_name = "ББИ-24-3"
-sheet_name = "1 курс"
-schedule_file_url = "https://misis.ru/files/-/715c2b5e46318098d84f36722b9532dd/10924_ikn.xlsx"
+group_name = open("group_name.key").read()
+sheet_name = open("sheet_name.key").read()
+schedule_file_url = open("schedule_file_url.key").read()
+use_auto_file_url = True
 # schedule_file_path = "ikn_300824.xlsx"
+
+if use_auto_file_url:
+    from selenium import webdriver
+    from selenium.webdriver.common.by import By
+    driver = webdriver.Chrome()
+    driver.implicitly_wait(30)
+    driver.get('https://misis.ru/students/schedule/')
+    schedule_file_url = driver.find_element(By.CSS_SELECTOR, "#js-content > div > div > div.data > div.row.o > div:nth-child(2) > div > p:nth-child(2) > span > a").get_attribute('href')
+    print(f"Auto file url: {schedule_file_url}")
+    driver.quit()
 
 df = pd.read_excel(schedule_file_url, sheet_name=sheet_name)
 
