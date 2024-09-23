@@ -159,10 +159,9 @@ df_upper_week = shift_dates_by_row(df_upper_week)
 df_lower_week = shift_dates_by_row(df_lower_week)
 
 # Функция для создания события в календаре
-def create_event(cal, subject, description, location, start, end):
+def create_event(cal: Calendar, subject: str, description: str, location: str, start, end):
     event = Event()
     event.add('summary', subject)
-    event.add('description', description)
 
     # Проверяем день недели и изменяем локацию, если она указана как "Каф. ИЯКТ"
     day_of_week = start.weekday()  # 0 - понедельник, 1 - вторник, ..., 6 - воскресенье
@@ -174,7 +173,29 @@ def create_event(cal, subject, description, location, start, end):
         else:
             raise ValueError("Ошибка при автоматической замене аудитории для Английского языка. Проверьте настройки")
     
+    # Если аудитория находится в корпусе Б, то дополнительно добавляем в событие информацию о лифтах, которые можно использовать
+    if location[0] == "Б":
+        floor = location[2]
+
+        try:
+            floor = int(floor)
+        except ValueError:
+            raise ValueError("Некорректный номер этажа в корпусе Б. Проверьте настройки.")
+        
+        right_elevators = [2, 6, 9, 10]
+        left_elevators = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+        if floor in right_elevators:
+            description += "\nМожно использовать любой из лифтов в корпусе Б."
+            location += " (Любые лифты)"
+        elif floor in left_elevators:
+            description += "\nМожно использовать только левые лифты в корпусе Б."
+            location += " (Только левые лифты)"
+        elif floor not in left_elevators:
+            raise ValueError("Некорректный номер этажа в корпусе Б. Проверьте настройки.")
+        
     event.add('location', location)
+    event.add('description', description)
 
     event.add('dtstart', start)
     event.add('dtend', end)
