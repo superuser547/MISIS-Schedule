@@ -7,8 +7,8 @@ from icalendar import Calendar, Event, Alarm
 group_name = open("group_name.key").read()
 sheet_name = open("sheet_name.key").read()
 schedule_file_url = open("schedule_file_url.key").read()
-use_auto_file_url = True
-# schedule_file_path = "ikn_300824.xlsx"
+use_auto_file_url = False
+schedule_file_url = "/Users/usersuper/Desktop/MISIS Schedule/e54a581d43720e8803f95fa2ba88d818.xls"
 
 if use_auto_file_url:
     from selenium import webdriver
@@ -16,7 +16,7 @@ if use_auto_file_url:
     driver = webdriver.Chrome()
     driver.implicitly_wait(30)
     driver.get('https://misis.ru/students/schedule/')
-    schedule_file_url = driver.find_element(By.CSS_SELECTOR, "#js-content > div > div > div.data > div.row.o > div:nth-child(2) > div > p:nth-child(2) > span > a").get_attribute('href')
+    schedule_file_url = driver.find_element(By.CSS_SELECTOR, ".col-md-2:nth-child(2) .first_child a").get_attribute('href')
     print(f"Auto file url: {schedule_file_url}")
     driver.quit()
 
@@ -49,8 +49,27 @@ schedule = data
 # upper_week_schedule = [row[:2] for row in schedule]  # Первые два столбца для верхней недели
 # lower_week_schedule = [row[2:] for row in schedule]  # Последние два столбца для нижней недели
 
-lower_week_schedule = [list(x)[:2] for x in schedule[1::2]]  # Элементы с нечетными индексами
-upper_week_schedule = schedule[::2]  # Элементы с четными индексами
+# Вместо (старый вариант):
+# lower_week_schedule = [list(x)[:2] for x in schedule[1::2]]
+# upper_week_schedule = schedule[::2]
+
+# Теперь:
+lower_week_schedule = schedule[::2]  # нечётные недели идут "первыми" во втором семестре
+upper_week_schedule = [list(x)[:2] for x in schedule[1::2]]
+
+
+# print("---- SCHEDULE[0..10] ----")
+# for i, row in enumerate(schedule[:10]):
+#     print(i, row)
+
+# print("---- LOWER_WEEK (чётные) [0..5] ----")
+# for i, row in enumerate(lower_week_schedule[:5]):
+#     print(i, row)
+
+# print("---- UPPER_WEEK (нечётные) [0..5] ----")
+# for i, row in enumerate(upper_week_schedule[:5]):
+#     print(i, row)
+
 
 # Преобразуем списки в DataFrame и добавляем временные метки начала и конца пар
 schedule_times = [
@@ -147,8 +166,13 @@ def shift_dates_by_row(df: pd.DataFrame):
     return df
 
 # Даты начала верхней и нижней недель
-start_date_upper_week = '2024-09-02'
-start_date_lower_week = '2024-09-09'
+# Вместо
+# start_date_upper_week = '2024-09-02'
+# start_date_lower_week = '2024-09-09'
+
+start_date_upper_week = '2025-09-01'   # 10 февраля 2025 (понедельник)
+start_date_lower_week = '2025-09-08'  # 17 февраля 2025 (понедельник)
+
 
 # Добавляем временные столбцы
 df_upper_week = add_time_columns(upper_week_schedule, start_date_upper_week)
@@ -163,15 +187,16 @@ def create_event(cal: Calendar, subject: str, description: str, location: str, s
     event = Event()
     event.add('summary', subject)
 
+    # Пока не пишем аудиторию для английского, как пришлют - дополнить
     # Проверяем день недели и изменяем локацию, если она указана как "Каф. ИЯКТ"
     day_of_week = start.weekday()  # 0 - понедельник, 1 - вторник, ..., 6 - воскресенье
-    if location == "Каф. ИЯКТ":
-        if day_of_week == 1:  # Вторник
-            location = "Г-460"
-        elif day_of_week == 3:  # Четверг
-            location = "Г-473"
-        else:
-            raise ValueError("Ошибка при автоматической замене аудитории для Английского языка. Проверьте настройки")
+    # if location == "Каф. ИЯКТ":
+    #     if day_of_week == 0:  # Понедельник
+    #         location = "Б-828"
+    #     elif day_of_week == 2:  # Среда
+    #         location = "Б-829"
+    #     else:
+    #         raise ValueError("Ошибка при автоматической замене аудитории для Английского языка. Проверьте настройки")
     
     # Если аудитория находится в корпусе Б, то дополнительно добавляем в событие информацию о лифтах, которые можно использовать
     if location[0] == "Б":
@@ -237,17 +262,45 @@ for index, row in df_upper_week.iterrows():
     if pd.notna(row['Занятие']):  # Проверяем, что занятие не пустое
         start = row['Start']
         end = row['End']
-        create_event(cal, row['Занятие'], f"{row['Занятие']}, \n{row['Аудитория']}, \nВерхняя неделя", row['Аудитория'], start, end)
+        create_event(cal, row['Занятие'], f"{row['Занятие']}, \n{row['Аудитория']}, \nНижняя неделя", row['Аудитория'], start, end)
 
 # Обрабатываем каждую строку датафрейма для нижней недели
 for index, row in df_lower_week.iterrows():
     if pd.notna(row['Занятие']):  # Проверяем, что занятие не пустое
         start = row['Start']
         end = row['End']
-        create_event(cal, row['Занятие'], f"{row['Занятие']}, \n{row['Аудитория']}, \nНижняя неделя", row['Аудитория'], start, end)
+        create_event(cal, row['Занятие'], f"{row['Занятие']}, \n{row['Аудитория']}, \nВерхняя неделя", row['Аудитория'], start, end)
+
+# # Записываем календарь в файл .ics
+# with open('schedule2.ics', 'wb') as f:
+#     f.write(cal.to_ical())
+
+# print("Календарь создан и сохранен в файл 'schedule2.ics'")
+
 
 # Записываем календарь в файл .ics
-with open('schedule.ics', 'wb') as f:
-    f.write(cal.to_ical())
+import os
 
-print("Календарь создан и сохранен в файл 'schedule.ics'")
+# Генерируем контент нашего календаря в формате iCal (байты)
+new_ical_content = cal.to_ical()
+
+ics_filename = 'schedule4.ics'
+
+# Проверяем, существует ли уже файл
+if os.path.exists(ics_filename):
+    # Считываем старый файл
+    with open(ics_filename, 'rb') as old_file:
+        old_ical_content = old_file.read()
+    # Сравниваем старый и новый контент
+    if old_ical_content == new_ical_content:
+        print("Новый файл не отличается от старого. Изменения в расписании отсутствуют.")
+    else:
+        print("Новый файл отличается от старого. Расписание было обновлено.")
+else:
+    print("Старого файла не было, сохраняем новый файл с расписанием.")
+
+# Перезаписываем (или создаём) файл заново
+with open(ics_filename, 'wb') as f:
+    f.write(new_ical_content)
+
+print(f"Календарь создан и сохранен в файл '{ics_filename}'")

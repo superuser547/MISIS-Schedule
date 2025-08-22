@@ -1,7 +1,9 @@
-/tests.ipynb
-tests2.ipynb
+*.ipynb
 Other Files
 selectors.ipynb
 group_name.key
 schedule_file_url.key
-sheet_name.ke
+*.key
+*.ics
+*.xls
+.DS_Store
