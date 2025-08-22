@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 from icalendar import Calendar, Event, Alarm
+from icalendar import Calendar, Event, Alarm
 
 # Настройки
 group_name = open("group_name.key").read()
@@ -33,7 +34,11 @@ list1 = df[df.columns[group_column_indexes[0]]].tolist()[1:]
 list2 = df[df.columns[group_column_indexes[1]]].tolist()[1:]
 # list3 = df[df.columns[group_column_indexes[2]]].tolist()[1:]
 # list4 = df[df.columns[group_column_indexes[3]]].tolist()[1:]
+# list3 = df[df.columns[group_column_indexes[2]]].tolist()[1:]
+# list4 = df[df.columns[group_column_indexes[3]]].tolist()[1:]
 
+data = [list(item) for item in zip(list1, list2)]
+# data = [list(item) for item in zip(list1, list2, list3, list4)]
 data = [list(item) for item in zip(list1, list2)]
 # data = [list(item) for item in zip(list1, list2, list3, list4)]
 
@@ -46,6 +51,8 @@ else:
 schedule = data
 
 # Разделение на верхнюю и нижнюю неделю
+# upper_week_schedule = [row[:2] for row in schedule]  # Первые два столбца для верхней недели
+# lower_week_schedule = [row[2:] for row in schedule]  # Последние два столбца для нижней недели
 # upper_week_schedule = [row[:2] for row in schedule]  # Первые два столбца для верхней недели
 # lower_week_schedule = [row[2:] for row in schedule]  # Последние два столбца для нижней недели
 
@@ -249,7 +256,35 @@ def create_event(cal: Calendar, subject: str, description: str, location: str, s
         event.add('color', 'green')  # Зеленый цвет для практик
     elif "Лабораторные" in subject:
         event.add('color', 'blue')  # Синий цвет для лабораторных
+    
+    # Добавляем повторение каждые 2 недели
+    event.add('rrule', {'freq': 'weekly', 'interval': 2})
+
+    # Добавляем уведомления за 15 и 5 минут
+    alarm_15_min = Alarm()
+    alarm_15_min.add('action', 'DISPLAY')
+    alarm_15_min.add('description', "Уведомление за 15 минут")
+    alarm_15_min.add('trigger', timedelta(minutes=-15))
+    
+    alarm_5_min = Alarm()
+    alarm_5_min.add('action', 'DISPLAY')
+    alarm_5_min.add('description', "Уведомление за 5 минут")
+    alarm_5_min.add('trigger', timedelta(minutes=-5))
+
+    event.add_component(alarm_15_min)
+    event.add_component(alarm_5_min)
+
+    # Определяем цвет события через свойство COLOR
+    if "Лекционные" in subject:
+        event.add('color', 'orange')  # Оранжевый цвет для лекций
+    elif "Практические" in subject:
+        event.add('color', 'green')  # Зеленый цвет для практик
+    elif "Лабораторные" in subject:
+        event.add('color', 'blue')  # Синий цвет для лабораторных
     else:
+        event.add('color', 'red')  # Красный цвет для остальных событий
+
+    cal.add_component(event)
         event.add('color', 'red')  # Красный цвет для остальных событий
 
     cal.add_component(event)
