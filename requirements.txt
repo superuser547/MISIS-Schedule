@@ -1,0 +1,6 @@
+pandas
+numpy
+icalendar
+selenium
+openpyxl
+xlrd
