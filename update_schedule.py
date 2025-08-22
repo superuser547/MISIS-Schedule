@@ -285,7 +285,7 @@ def create_event(cal: Calendar, subject: str, description: str, location: str, s
         event.add('color', 'red')  # Красный цвет для остальных событий
 
     cal.add_component(event)
-        event.add('color', 'red')  # Красный цвет для остальных событий
+    event.add('color', 'red')  # Красный цвет для остальных событий
 
     cal.add_component(event)
 
