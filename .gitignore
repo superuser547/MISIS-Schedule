@@ -6,4 +6,5 @@ schedule_file_url.key
 *.key
 *.ics
 *.xls
+!template.xls
 .DS_Store
