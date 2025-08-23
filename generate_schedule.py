@@ -104,12 +104,14 @@ def resolve_schedule_file(cfg: Config) -> str:
             ) from exc
         driver = webdriver.Chrome()
         driver.implicitly_wait(30)
-        driver.get(cfg.schedule_page_url)
-        url = driver.find_element(By.CSS_SELECTOR, cfg.schedule_link_selector).get_attribute(
-            "href"
-        )
-        driver.quit()
-        return url
+        try:
+            driver.get(cfg.schedule_page_url)
+            url = driver.find_element(By.CSS_SELECTOR, cfg.schedule_link_selector).get_attribute(
+                "href"
+            )
+            return url
+        finally:
+            driver.quit()
     raise ValueError("Неизвестное значение SCHEDULE_SOURCE. Используйте 'file', 'url' или 'auto'.")
 
 
