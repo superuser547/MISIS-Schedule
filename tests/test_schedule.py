@@ -4,14 +4,19 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
-from generate_schedule import build_schedule_dataframe, read_schedule, split_schedule
+from generate_schedule import (
+    build_schedule_dataframe,
+    create_event,
+    read_schedule,
+    split_schedule,
+)
 
 
 def test_split_schedule():
     data = [(f"sub{i}", f"room{i}") for i in range(6)]
-    lower, upper = split_schedule(data)
-    assert lower == [("sub0", "room0"), ("sub2", "room2"), ("sub4", "room4")]
-    assert upper == [("sub1", "room1"), ("sub3", "room3"), ("sub5", "room5")]
+    upper, lower = split_schedule(data)
+    assert upper == [("sub0", "room0"), ("sub2", "room2"), ("sub4", "room4")]
+    assert lower == [("sub1", "room1"), ("sub3", "room3"), ("sub5", "room5")]
 
 
 def test_build_schedule_dataframe():
@@ -40,3 +45,22 @@ def test_read_schedule_subgroup(tmp_path):
 
     assert sub1[0] == ("S1_0", "R1_0")
     assert sub2[0] == ("S2_0", "R2_0")
+
+
+def test_b_building_ground_floor_has_no_elevator_info():
+    from icalendar import Calendar
+
+    cal = Calendar()
+    create_event(
+        cal,
+        "Math",
+        "Б-3",
+        datetime(2024, 1, 1, 9, 0),
+        datetime(2024, 1, 1, 10, 0),
+        "Верхняя неделя",
+    )
+    event = cal.walk("vevent")[0]
+    desc = str(event.get("description"))
+    loc = str(event.get("location"))
+    assert "лифты" not in desc
+    assert "лифты" not in loc

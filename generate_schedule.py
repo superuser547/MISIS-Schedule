@@ -137,8 +137,14 @@ def read_schedule(
     return data
 
 
-def split_schedule(data: Iterable[Tuple[str, str]]) -> Tuple[List[Tuple[str, str]], List[Tuple[str, str]]]:
-    """Split raw schedule data into lower and upper week lists."""
+def split_schedule(
+    data: Iterable[Tuple[str, str]]
+) -> Tuple[List[Tuple[str, str]], List[Tuple[str, str]]]:
+    """Split raw schedule data into upper and lower week lists.
+
+    The Excel timetable alternates entries: first for the upper week, then for the
+    lower week.  The function therefore returns ``(upper, lower)`` tuples.
+    """
 
     data_list = list(data)
     return data_list[::2], data_list[1::2]
@@ -194,24 +200,34 @@ def create_event(cal: Calendar, subject: str, location: str, start: datetime, en
 
     description = f"{subject}\n{location}\n{week_label}"
 
-    if location and location.startswith("Б"):
-        floor_char = location[2] if len(location) > 2 else ""
-        try:
-            floor = int(floor_char)
-        except ValueError:
-            raise ValueError("Некорректный номер этажа в корпусе Б. Проверьте настройки.")
-
-        right_elevators = {2, 6, 9, 10}
-        left_elevators = set(range(1, 12))
-
-        if floor in right_elevators:
-            description += "\nМожно использовать любой из лифтов в корпусе Б."
-            location += " (Любые лифты)"
-        elif floor in left_elevators:
-            description += "\nМожно использовать только левые лифты в корпусе Б."
-            location += " (Только левые лифты)"
+    if location and location.startswith("Б-"):
+        room_part = location.split("-", 1)[1]
+        if len(room_part) == 1:
+            # Б-3, Б-4 и т.д. находятся на первом этаже, поэтому информация
+            # о лифтах не добавляется.
+            pass
         else:
-            raise ValueError("Некорректный номер этажа в корпусе Б. Проверьте настройки.")
+            floor_char = room_part[0]
+            try:
+                floor = int(floor_char)
+            except ValueError:
+                raise ValueError(
+                    "Некорректный номер этажа в корпусе Б. Проверьте настройки."
+                )
+
+            right_elevators = {2, 6, 9, 10}
+            left_elevators = set(range(1, 12))
+
+            if floor in right_elevators:
+                description += "\nМожно использовать любой из лифтов в корпусе Б."
+                location += " (Любые лифты)"
+            elif floor in left_elevators:
+                description += "\nМожно использовать только левые лифты в корпусе Б."
+                location += " (Только левые лифты)"
+            else:
+                raise ValueError(
+                    "Некорректный номер этажа в корпусе Б. Проверьте настройки."
+                )
 
     event.add("location", location)
     event.add("description", description)
@@ -273,9 +289,9 @@ def main() -> None:
     raw_data = read_schedule(
         schedule_path, cfg.sheet_name, cfg.group_name, cfg.subgroup_number
     )
-    lower, upper = split_schedule(raw_data)
-    df_lower = build_schedule_dataframe(lower, cfg.lower_week_start)
+    upper, lower = split_schedule(raw_data)
     df_upper = build_schedule_dataframe(upper, cfg.upper_week_start)
+    df_lower = build_schedule_dataframe(lower, cfg.lower_week_start)
 
     cal = Calendar()
     for df, week_label in ((df_upper, "Верхняя неделя"), (df_lower, "Нижняя неделя")):
