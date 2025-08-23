@@ -185,23 +185,36 @@ def build_schedule_dataframe(schedule: List[Tuple[str, str]], start_date: str) -
 # ---------------------------------------------------------------------------
 
 
-def create_event(cal: Calendar, subject: str, location: str, start: datetime, end: datetime, week_label: str) -> None:
+def create_event(
+    cal: Calendar,
+    subject: str,
+    location: str,
+    start: datetime,
+    end: datetime,
+    week_label: str,
+) -> None:
     """Добавляет одно событие в календарь ``cal``."""
 
     event = Event()
     event.add("summary", subject)
 
     day_of_week = start.weekday()  # 0 — понедельник ... 6 — воскресенье
-    if location == "Каф. ИЯКТ":
+
+    location_is_empty = pd.isna(location) or (
+        isinstance(location, str) and not location.strip()
+    )
+    location_str = "" if location_is_empty else str(location)
+
+    if location_str == "Каф. ИЯКТ":
         # При необходимости кастомизируйте этот блок. Используйте ``day_of_week``
         # и любые другие параметры (например, индикатор недели), чтобы
         # динамически менять аудиторию. Замените ``pass`` своей логикой.
         pass
 
-    description = f"{subject}\n{location}\n{week_label}"
+    description = f"{subject}\n{week_label}" if location_is_empty else f"{subject}\n{location_str}\n{week_label}"
 
-    if location and location.startswith("Б-"):
-        room_part = location.split("-", 1)[1]
+    if location_str.startswith("Б-"):
+        room_part = location_str.split("-", 1)[1]
         if len(room_part) == 1:
             # Б-3, Б-4 и т.д. находятся на первом этаже, поэтому информация
             # о лифтах не добавляется.
@@ -220,16 +233,17 @@ def create_event(cal: Calendar, subject: str, location: str, start: datetime, en
 
             if floor in right_elevators:
                 description += "\nМожно использовать любой из лифтов в корпусе Б."
-                location += " (Любые лифты)"
+                location_str += " (Любые лифты)"
             elif floor in left_elevators:
                 description += "\nМожно использовать только левые лифты в корпусе Б."
-                location += " (Только левые лифты)"
+                location_str += " (Только левые лифты)"
             else:
                 raise ValueError(
                     "Некорректный номер этажа в корпусе Б. Проверьте настройки."
                 )
 
-    event.add("location", location)
+    if location_str:
+        event.add("location", location_str)
     event.add("description", description)
     event.add("dtstart", start)
     event.add("dtend", end)

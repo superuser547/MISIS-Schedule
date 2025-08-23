@@ -64,3 +64,22 @@ def test_b_building_ground_floor_has_no_elevator_info():
     loc = str(event.get("location"))
     assert "лифты" not in desc
     assert "лифты" not in loc
+
+
+def test_create_event_without_location():
+    from icalendar import Calendar
+    import math
+
+    cal = Calendar()
+    create_event(
+        cal,
+        "Math",
+        math.nan,
+        datetime(2024, 1, 1, 9, 0),
+        datetime(2024, 1, 1, 10, 0),
+        "Верхняя неделя",
+    )
+    event = cal.walk("vevent")[0]
+    assert event.get("location") is None
+    desc = str(event.get("description"))
+    assert desc == "Math\nВерхняя неделя"
