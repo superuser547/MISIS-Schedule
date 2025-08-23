@@ -5,3 +5,4 @@ Other Files
 !template.xls
 .DS_Store
 .env
+__pycache__
