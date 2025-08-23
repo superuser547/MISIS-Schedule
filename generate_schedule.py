@@ -32,6 +32,7 @@ class Config:
     """Application settings loaded from environment variables."""
 
     group_name: str
+    subgroup_number: int
     sheet_name: str
     schedule_source: str  # file, url, or auto
     schedule_file_path: str | None
@@ -54,8 +55,12 @@ def load_config() -> Config:
         ) from exc
 
     load_dotenv()
+    subgroup = int(os.environ.get("SUBGROUP_NUMBER", "1"))
+    if subgroup not in (1, 2):
+        raise ValueError("SUBGROUP_NUMBER must be 1 or 2")
     return Config(
         group_name=os.environ["GROUP_NAME"],
+        subgroup_number=subgroup,
         sheet_name=os.environ["SHEET_NAME"],
         schedule_source=os.environ.get("SCHEDULE_SOURCE", "file").lower(),
         schedule_file_path=os.environ.get("SCHEDULE_FILE_PATH"),
@@ -113,13 +118,16 @@ def resolve_schedule_file(cfg: Config) -> str:
 # ---------------------------------------------------------------------------
 
 
-def read_schedule(path_or_url: str, sheet_name: str, group_name: str) -> List[Tuple[str, str]]:
-    """Load Excel schedule and return a list of ``(subject, room)`` tuples."""
+def read_schedule(
+    path_or_url: str, sheet_name: str, group_name: str, subgroup: int
+) -> List[Tuple[str, str]]:
+    """Load Excel schedule for ``subgroup`` and return ``(subject, room)`` tuples."""
 
     df = pd.read_excel(path_or_url, sheet_name=sheet_name)
     group_idx = df.columns.get_loc(group_name)
-    subjects = df.iloc[1:, group_idx].tolist()
-    rooms = df.iloc[1:, group_idx + 1].tolist()
+    offset = (subgroup - 1) * 2
+    subjects = df.iloc[1:, group_idx + offset].tolist()
+    rooms = df.iloc[1:, group_idx + offset + 1].tolist()
     data = list(zip(subjects, rooms))
 
     if len(data) == 97:  # expected number of slots is 98
@@ -262,7 +270,9 @@ def write_calendar(cal: Calendar, filename: str) -> None:
 def main() -> None:
     cfg = load_config()
     schedule_path = resolve_schedule_file(cfg)
-    raw_data = read_schedule(schedule_path, cfg.sheet_name, cfg.group_name)
+    raw_data = read_schedule(
+        schedule_path, cfg.sheet_name, cfg.group_name, cfg.subgroup_number
+    )
     lower, upper = split_schedule(raw_data)
     df_lower = build_schedule_dataframe(lower, cfg.lower_week_start)
     df_upper = build_schedule_dataframe(upper, cfg.upper_week_start)
