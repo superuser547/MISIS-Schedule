@@ -9,6 +9,7 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 
 from generate_schedule import (
     build_schedule_dataframe,
+    load_config,
     create_event,
     read_schedule,
     resolve_schedule_file,
@@ -70,6 +71,27 @@ def test_b_building_ground_floor_has_no_elevator_info():
     loc = str(event.get("location"))
     assert "лифты" not in desc
     assert "лифты" not in loc
+
+
+def test_load_config_missing_env(monkeypatch):
+    """Missing required env variable raises an informative error."""
+    import types
+
+    # Mock dotenv to avoid dependency on external package
+    monkeypatch.setitem(
+        sys.modules,
+        "dotenv",
+        types.SimpleNamespace(load_dotenv=lambda *args, **kwargs: None),
+    )
+
+    # Set only the required variables except GROUP_NAME
+    monkeypatch.setenv("SHEET_NAME", "Sheet1")
+    monkeypatch.setenv("UPPER_WEEK_START", "2024-09-02")
+    monkeypatch.setenv("LOWER_WEEK_START", "2024-09-09")
+    monkeypatch.delenv("GROUP_NAME", raising=False)
+    with pytest.raises(RuntimeError) as excinfo:
+        load_config()
+    assert "GROUP_NAME" in str(excinfo.value)
 
 
 def test_resolve_schedule_file_auto_quits_driver_on_search_error():
