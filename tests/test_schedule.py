@@ -1,6 +1,9 @@
 from datetime import datetime
 import sys
 from pathlib import Path
+from unittest.mock import MagicMock, patch
+
+import pytest
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
@@ -8,7 +11,9 @@ from generate_schedule import (
     build_schedule_dataframe,
     create_event,
     read_schedule,
+    resolve_schedule_file,
     split_schedule,
+    Config,
     write_calendar,
 )
 
@@ -65,6 +70,31 @@ def test_b_building_ground_floor_has_no_elevator_info():
     loc = str(event.get("location"))
     assert "лифты" not in desc
     assert "лифты" not in loc
+
+
+def test_resolve_schedule_file_auto_quits_driver_on_search_error():
+    cfg = Config(
+        group_name="G",
+        subgroup_number=1,
+        sheet_name="Sheet1",
+        schedule_source="auto",
+        schedule_file_path=None,
+        schedule_file_url=None,
+        schedule_page_url="https://example.com",
+        schedule_link_selector="a",
+        upper_week_start="2024-09-02",
+        lower_week_start="2024-09-09",
+        ics_filename="schedule.ics",
+    )
+
+    mock_driver = MagicMock()
+    mock_driver.find_element.side_effect = Exception("search failed")
+
+    with patch("selenium.webdriver.Chrome", return_value=mock_driver):
+        with pytest.raises(Exception):
+            resolve_schedule_file(cfg)
+
+    mock_driver.quit.assert_called_once()
 
 
 def test_write_calendar_skips_rewrite(tmp_path):
