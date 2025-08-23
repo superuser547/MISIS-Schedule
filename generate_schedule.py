@@ -58,23 +58,28 @@ def load_config() -> Config:
     subgroup = int(os.environ.get("SUBGROUP_NUMBER", "1"))
     if subgroup not in (1, 2):
         raise ValueError("SUBGROUP_NUMBER must be 1 or 2")
-    return Config(
-        group_name=os.environ["GROUP_NAME"],
-        subgroup_number=subgroup,
-        sheet_name=os.environ["SHEET_NAME"],
-        schedule_source=os.environ.get("SCHEDULE_SOURCE", "file").lower(),
-        schedule_file_path=os.environ.get("SCHEDULE_FILE_PATH"),
-        schedule_file_url=os.environ.get("SCHEDULE_FILE_URL"),
-        schedule_page_url=os.environ.get(
-            "SCHEDULE_PAGE_URL", "https://misis.ru/students/schedule/"
-        ),
-        schedule_link_selector=os.environ.get(
-            "SCHEDULE_LINK_SELECTOR", ".col-md-2:nth-child(2) .first_child a"
-        ),
-        upper_week_start=os.environ["UPPER_WEEK_START"],
-        lower_week_start=os.environ["LOWER_WEEK_START"],
-        ics_filename=os.environ.get("ICS_FILENAME", "schedule.ics"),
-    )
+    try:
+        return Config(
+            group_name=os.environ["GROUP_NAME"],
+            subgroup_number=subgroup,
+            sheet_name=os.environ["SHEET_NAME"],
+            schedule_source=os.environ.get("SCHEDULE_SOURCE", "file").lower(),
+            schedule_file_path=os.environ.get("SCHEDULE_FILE_PATH"),
+            schedule_file_url=os.environ.get("SCHEDULE_FILE_URL"),
+            schedule_page_url=os.environ.get(
+                "SCHEDULE_PAGE_URL", "https://misis.ru/students/schedule/"
+            ),
+            schedule_link_selector=os.environ.get(
+                "SCHEDULE_LINK_SELECTOR", ".col-md-2:nth-child(2) .first_child a"
+            ),
+            upper_week_start=os.environ["UPPER_WEEK_START"],
+            lower_week_start=os.environ["LOWER_WEEK_START"],
+            ics_filename=os.environ.get("ICS_FILENAME", "schedule.ics"),
+        )
+    except KeyError as exc:
+        raise RuntimeError(
+            f"Missing required environment variable: {exc.args[0]}"
+        ) from exc
 
 
 # ---------------------------------------------------------------------------
