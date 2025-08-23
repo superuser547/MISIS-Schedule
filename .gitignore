@@ -1,6 +1,5 @@
 *.ipynb
 Other Files
-selectors.ipynb
 *.ics
 *.xls
 !template.xls
