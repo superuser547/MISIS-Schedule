@@ -1,13 +1,13 @@
-"""Generate iCalendar schedule from MISIS Excel timetable.
+"""Генерирует календарь iCalendar на основе расписания НИТУ «МИСИС» в Excel.
 
-The script reads configuration from a `.env` file, converts the Excel
-schedule into an iCalendar file and saves it to disk.  Three modes of
-loading the schedule file are supported:
+Скрипт считывает параметры из файла `.env`, преобразует Excel‑расписание
+в календарный файл iCalendar и сохраняет его на диск. Поддерживаются три
+режима получения файла расписания:
 
-* ``file`` – use a local path from ``SCHEDULE_FILE_PATH``;
-* ``url`` – download the file directly from ``SCHEDULE_FILE_URL``;
-* ``auto`` – open ``SCHEDULE_PAGE_URL`` with Selenium and extract the
-  schedule link using ``SCHEDULE_LINK_SELECTOR``.
+* ``file`` – используется локальный путь из ``SCHEDULE_FILE_PATH``;
+* ``url`` – файл скачивается напрямую из ``SCHEDULE_FILE_URL``;
+* ``auto`` – открывается страница ``SCHEDULE_PAGE_URL`` через Selenium и
+  ссылка на расписание извлекается по селектору ``SCHEDULE_LINK_SELECTOR``.
 """
 
 from __future__ import annotations
@@ -23,18 +23,18 @@ from icalendar import Alarm, Calendar, Event
 
 
 # ---------------------------------------------------------------------------
-# Configuration
+# Настройки
 # ---------------------------------------------------------------------------
 
 
 @dataclass
 class Config:
-    """Application settings loaded from environment variables."""
+    """Настройки приложения, загруженные из переменных окружения."""
 
     group_name: str
     subgroup_number: int
     sheet_name: str
-    schedule_source: str  # file, url, or auto
+    schedule_source: str  # режим получения файла: file, url или auto
     schedule_file_path: str | None
     schedule_file_url: str | None
     schedule_page_url: str
@@ -45,13 +45,13 @@ class Config:
 
 
 def load_config() -> Config:
-    """Read settings from ``.env`` and return a :class:`Config` object."""
+    """Читает настройки из `.env` и возвращает объект :class:`Config`."""
 
     try:  # импортируем только при необходимости
         from dotenv import load_dotenv
     except ImportError as exc:  # pragma: no cover - ошибка установки
         raise RuntimeError(
-            "python-dotenv is required to load configuration"
+            "Для загрузки конфигурации необходим пакет python-dotenv"
         ) from exc
 
     load_dotenv()
@@ -78,12 +78,12 @@ def load_config() -> Config:
 
 
 # ---------------------------------------------------------------------------
-# Loading the schedule file
+# Получение файла расписания
 # ---------------------------------------------------------------------------
 
 
 def resolve_schedule_file(cfg: Config) -> str:
-    """Return a path or URL to the Excel schedule file based on ``cfg``."""
+    """Возвращает путь или URL к файлу расписания Excel на основе ``cfg``."""
 
     mode = cfg.schedule_source
     if mode == "file":
@@ -98,9 +98,9 @@ def resolve_schedule_file(cfg: Config) -> str:
         try:
             from selenium import webdriver
             from selenium.webdriver.common.by import By
-        except Exception as exc:  # pragma: no cover - import error shown to user
+        except Exception as exc:  # pragma: no cover - ошибка импорта будет показана пользователю
             raise RuntimeError(
-                "Selenium is required for 'auto' schedule mode"
+                "Для режима 'auto' требуется установленный Selenium"
             ) from exc
         driver = webdriver.Chrome()
         driver.implicitly_wait(30)
@@ -110,18 +110,18 @@ def resolve_schedule_file(cfg: Config) -> str:
         )
         driver.quit()
         return url
-    raise ValueError("Unknown SCHEDULE_SOURCE. Use 'file', 'url', or 'auto'.")
+    raise ValueError("Неизвестное значение SCHEDULE_SOURCE. Используйте 'file', 'url' или 'auto'.")
 
 
 # ---------------------------------------------------------------------------
-# Parsing and transforming schedule data
+# Парсинг и преобразование данных расписания
 # ---------------------------------------------------------------------------
 
 
 def read_schedule(
     path_or_url: str, sheet_name: str, group_name: str, subgroup: int
 ) -> List[Tuple[str, str]]:
-    """Load Excel schedule for ``subgroup`` and return ``(subject, room)`` tuples."""
+    """Загружает расписание из Excel для указанной подгруппы и возвращает пары ``(предмет, аудитория)``."""
 
     df = pd.read_excel(path_or_url, sheet_name=sheet_name)
     group_idx = df.columns.get_loc(group_name)
@@ -130,7 +130,7 @@ def read_schedule(
     rooms = df.iloc[1:, group_idx + offset + 1].tolist()
     data = list(zip(subjects, rooms))
 
-    if len(data) == 97:  # expected number of slots is 98
+    if len(data) == 97:  # ожидаемое количество слотов — 98
         data.append((None, None))
     if len(data) != 98:
         raise ValueError("Ошибка при формировании информации о расписании")
@@ -140,10 +140,10 @@ def read_schedule(
 def split_schedule(
     data: Iterable[Tuple[str, str]]
 ) -> Tuple[List[Tuple[str, str]], List[Tuple[str, str]]]:
-    """Split raw schedule data into upper and lower week lists.
+    """Разделяет исходные данные расписания на списки для верхней и нижней недель.
 
-    The Excel timetable alternates entries: first for the upper week, then for the
-    lower week.  The function therefore returns ``(upper, lower)`` tuples.
+    Excel‑таблица чередует записи: сначала для верхней недели, затем для
+    нижней. Функция возвращает кортеж ``(верхняя, нижняя)``.
     """
 
     data_list = list(data)
@@ -162,7 +162,7 @@ DAILY_TIMES: List[Tuple[str, str]] = [
 
 
 def build_schedule_dataframe(schedule: List[Tuple[str, str]], start_date: str) -> pd.DataFrame:
-    """Create a dataframe with start and end datetimes for each lesson."""
+    """Создаёт DataFrame с датами и временем начала и конца каждой пары."""
 
     base = datetime.fromisoformat(start_date)
     rows = []
@@ -181,21 +181,21 @@ def build_schedule_dataframe(schedule: List[Tuple[str, str]], start_date: str) -
 
 
 # ---------------------------------------------------------------------------
-# Calendar generation
+# Генерация календаря
 # ---------------------------------------------------------------------------
 
 
 def create_event(cal: Calendar, subject: str, location: str, start: datetime, end: datetime, week_label: str) -> None:
-    """Add a single event to ``cal``."""
+    """Добавляет одно событие в календарь ``cal``."""
 
     event = Event()
     event.add("summary", subject)
 
-    day_of_week = start.weekday()  # 0 - Monday ... 6 - Sunday
+    day_of_week = start.weekday()  # 0 — понедельник ... 6 — воскресенье
     if location == "Каф. ИЯКТ":
-        # Customize this block as needed. Use ``day_of_week`` and any other
-        # parameters (for example, a week indicator) to replace the location
-        # dynamically. Replace ``pass`` with your own logic.
+        # При необходимости кастомизируйте этот блок. Используйте ``day_of_week``
+        # и любые другие параметры (например, индикатор недели), чтобы
+        # динамически менять аудиторию. Замените ``pass`` своей логикой.
         pass
 
     description = f"{subject}\n{location}\n{week_label}"
@@ -261,7 +261,7 @@ def create_event(cal: Calendar, subject: str, location: str, start: datetime, en
 
 
 def write_calendar(cal: Calendar, filename: str) -> None:
-    """Save calendar to ``filename`` and report whether it changed."""
+    """Сохраняет календарь в файл ``filename`` и сообщает, изменилось ли содержимое."""
 
     new_content = cal.to_ical()
     path = Path(filename)
@@ -279,7 +279,7 @@ def write_calendar(cal: Calendar, filename: str) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Main script logic
+# Основная логика скрипта
 # ---------------------------------------------------------------------------
 
 
@@ -303,5 +303,5 @@ def main() -> None:
     write_calendar(cal, cfg.ics_filename)
 
 
-if __name__ == "__main__":  # pragma: no cover - manual execution
+if __name__ == "__main__":  # pragma: no cover - ручной запуск
     main()

@@ -20,7 +20,7 @@ def test_split_schedule():
 
 
 def test_build_schedule_dataframe():
-    schedule = [("Math", "B-100")] * 14  # two days of schedule
+    schedule = [("Math", "B-100")] * 14  # расписание на два дня
     df = build_schedule_dataframe(schedule, "2024-09-02")
     assert len(df) == len(schedule)
     assert df.iloc[0]["start"] == datetime(2024, 9, 2, 9, 0)
