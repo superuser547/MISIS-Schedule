@@ -164,7 +164,6 @@ DAILY_TIMES: List[Tuple[str, str]] = [
 def build_schedule_dataframe(schedule: List[Tuple[str, str]], start_date: str) -> pd.DataFrame:
     """Создаёт DataFrame с датами и временем начала и конца каждой пары."""
 
-    base = datetime.fromisoformat(start_date)
     rows = []
     for i, (subject, room) in enumerate(schedule):
         day = i // 7
