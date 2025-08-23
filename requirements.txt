@@ -4,3 +4,5 @@ icalendar
 selenium
 openpyxl
 xlrd
+python-dotenv
+pytest

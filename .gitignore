@@ -1,10 +1,8 @@
 *.ipynb
 Other Files
 selectors.ipynb
-group_name.key
-schedule_file_url.key
-*.key
 *.ics
 *.xls
 !template.xls
 .DS_Store
+.env
