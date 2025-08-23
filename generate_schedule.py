@@ -282,7 +282,10 @@ def write_calendar(cal: Calendar, filename: str) -> None:
     if path.exists():
         old_content = path.read_bytes()
         if old_content == new_content:
-            print("Новый файл не отличается от старого. Изменения в расписании отсутствуют.")
+            print(
+                "Новый файл не отличается от старого. Изменения в расписании отсутствуют."
+            )
+            return
         else:
             print("Новый файл отличается от старого. Расписание было обновлено.")
     else:

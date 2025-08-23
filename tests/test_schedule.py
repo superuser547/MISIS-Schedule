@@ -9,6 +9,7 @@ from generate_schedule import (
     create_event,
     read_schedule,
     split_schedule,
+    write_calendar,
 )
 
 
@@ -64,6 +65,27 @@ def test_b_building_ground_floor_has_no_elevator_info():
     loc = str(event.get("location"))
     assert "лифты" not in desc
     assert "лифты" not in loc
+
+
+def test_write_calendar_skips_rewrite(tmp_path):
+    import time
+    from icalendar import Calendar, Event
+
+    cal = Calendar()
+    event = Event()
+    event.add("summary", "Test")
+    event.add("dtstart", datetime(2024, 1, 1, 9, 0))
+    event.add("dtend", datetime(2024, 1, 1, 10, 0))
+    event.add("uid", "42")
+    cal.add_component(event)
+
+    ics_file = tmp_path / "schedule.ics"
+    write_calendar(cal, str(ics_file))
+    mtime_before = ics_file.stat().st_mtime
+    time.sleep(1)
+    write_calendar(cal, str(ics_file))
+    mtime_after = ics_file.stat().st_mtime
+    assert mtime_before == mtime_after
 
 
 def test_create_event_without_location():
