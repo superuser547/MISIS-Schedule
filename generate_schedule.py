@@ -220,18 +220,27 @@ def create_event(
     description = f"{subject}\n{week_label}" if location_is_empty else f"{subject}\n{location_str}\n{week_label}"
 
     if location_str.startswith("Б-"):
-        room_part = location_str.split("-", 1)[1]
+        room_part = location_str.split("-", 1)[1].strip()
         if len(room_part) == 1:
             # Б-3, Б-4 и т.д. находятся на первом этаже, поэтому информация
             # о лифтах не добавляется.
-            pass
+            description += "\nАудитория расположена на первом этаже."
+            location_str += " (1-й этаж)"
         else:
-            floor_char = room_part[0]
-            try:
-                floor = int(floor_char)
-            except ValueError:
+            # Берём корректный префикс этажа: 10, 11 или одну цифру 1–9.
+            # Это исключает случаи вроде Б-433 → 4 (а не 43).
+            import re
+            m = re.match(r'^(10|11|[1-9])', room_part)
+            if not m:
                 raise ValueError(
-                    "Некорректный номер этажа в корпусе Б. Проверьте настройки."
+                    f"Некорректный номер этажа в корпусе Б: '{room_part}'. Ожидали начало 1–9, 10 или 11."
+                )
+            floor = int(m.group(1))
+
+            # Доп. валидация диапазона этажей
+            if not (1 <= floor <= 11):
+                raise ValueError(
+                    f"Некорректный номер этажа в корпусе Б: распознан этаж {floor} из '{room_part}'. Проверьте настройки."
                 )
 
             right_elevators = {2, 6, 9, 10}
@@ -245,7 +254,7 @@ def create_event(
                 location_str += " (Только левые лифты)"
             else:
                 raise ValueError(
-                    "Некорректный номер этажа в корпусе Б. Проверьте настройки."
+                    f"Некорректный номер этажа в корпусе Б: распознан этаж {floor} из '{room_part}'. Проверьте настройки."
                 )
 
     if location_str:
