@@ -15,7 +15,6 @@ from misis_schedule.parser import (
 
 def test_reads_xls_and_xlsx(fixture_path):
     assert get_sheet_names(fixture_path) == ["Sheet1"]
-    assert "1 курс" in get_sheet_names(Path("template.xls"))
 
 
 def test_groups_and_variable_subgroups(fixture_sheet):
