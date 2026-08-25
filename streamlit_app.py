@@ -30,6 +30,8 @@ from misis_schedule.parser import (
 
 st.set_page_config(page_title="MISIS Schedule", page_icon="🗓️", layout="wide")
 
+IYAKT_LOCATION = "Каф. ИЯКТ"
+
 
 def _monday_on_or_after(value: date) -> date:
     """Возвращает ближайший понедельник, не раньше указанной даты."""
@@ -173,6 +175,10 @@ def main() -> None:
 
     st.subheader("Расписание")
     st.write(f"Найдено занятий: {len(lessons)}")
+    st.caption(
+        "Название предмета и аудиторию можно отредактировать прямо в таблице. "
+        "Изменения действуют только для текущего календаря."
+    )
     if not lessons:
         st.info("Для выбранной группы и подгруппы занятий не найдено.")
         return
@@ -198,6 +204,12 @@ def main() -> None:
         use_container_width=True,
     )
     edited_lessons = _apply_edits(lessons, edited_frame)
+    iyakt_count = sum(lesson.location == IYAKT_LOCATION for lesson in edited_lessons)
+    if iyakt_count:
+        st.warning(
+            f"🟨 В расписании {iyakt_count} занятий с «Каф. ИЯКТ». "
+            "Укажите нужную аудиторию в строках с жёлтой меткой перед формированием календаря."
+        )
     calendar_signature = (*selection_signature, _edits_signature(edited_lessons))
     if st.session_state.get("calendar_signature") != calendar_signature:
         st.session_state.pop("calendar_data", None)

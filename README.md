@@ -19,7 +19,7 @@ MISIS Schedule преобразует Excel-расписание НИТУ «МИ
 
 ## Онлайн-версия
 
-После развёртывания добавьте сюда ссылку на приложение Streamlit Community Cloud.
+Приложение доступно по адресу: [misis-schedule.streamlit.app](https://misis-schedule.streamlit.app/).
 
 ## Как использовать
 
