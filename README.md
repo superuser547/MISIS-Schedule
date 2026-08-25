@@ -70,7 +70,7 @@ streamlit run streamlit_app.py
 .venv\Scripts\Activate.ps1
 ```
 
-### Необязательный CLI
+### Дополнительный CLI
 
 Основной интерфейс — Streamlit. Для локальной автоматизации доступен тонкий CLI-адаптер:
 
@@ -83,23 +83,13 @@ python generate_schedule.py schedule.xls \
 
 Он также не использует `.env`, Selenium или сетевую загрузку.
 
-## Тесты и lint
+## Тесты и линтеры
 
 ```bash
 pip install -e ".[dev]"
 ruff check .
 pytest
 ```
-
-## Развёртывание в Streamlit Community Cloud
-
-1. Откройте Streamlit Community Cloud и войдите через GitHub.
-2. Выберите репозиторий `superuser547/MISIS-Schedule` и ветку `main`.
-3. В качестве Main file path укажите `streamlit_app.py`.
-4. Нажмите Deploy.
-
-Для стандартного развёртывания не нужны secrets, переменные окружения, Chrome, Selenium,
-база данных или постоянное хранилище.
 
 ## Структура проекта
 
