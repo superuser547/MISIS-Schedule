@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import replace
 from datetime import date, timedelta
+from hashlib import sha256
 from io import BytesIO
 
 import pandas as pd
@@ -71,7 +73,7 @@ def _apply_edits(lessons: list[Lesson], edited: pd.DataFrame) -> list[Lesson]:
     return [
         replace(
             lesson,
-            subject=str(row["Предмет"]).strip(),
+            subject=_optional_text(row["Предмет"]) or "",
             location=_optional_text(row["Аудитория"]),
         )
         for lesson, (_, row) in zip(lessons, edited.iterrows(), strict=True)
@@ -79,12 +81,20 @@ def _apply_edits(lessons: list[Lesson], edited: pd.DataFrame) -> list[Lesson]:
 
 
 def _optional_text(value: object) -> str | None:
-    """Нормализует пустую аудиторию в None."""
+    """Нормализует пустую текстовую ячейку в None."""
 
     if value is None or pd.isna(value):
         return None
     text = str(value).strip()
     return text or None
+
+
+def _edits_signature(lessons: list[Lesson]) -> str:
+    """Возвращает хеш редактируемых полей preview для проверки актуальности ICS."""
+
+    fields = [(lesson.subject, lesson.location) for lesson in lessons]
+    payload = json.dumps(fields, ensure_ascii=False, separators=(",", ":"))
+    return sha256(payload.encode()).hexdigest()
 
 
 def _download_name(group_name: str, subgroup_number: int) -> str:
@@ -106,6 +116,7 @@ def main() -> None:
     if uploaded is None:
         return
     workbook_bytes = uploaded.getvalue()
+    workbook_digest = sha256(workbook_bytes).hexdigest()
 
     try:
         sheet_names = get_sheet_names(BytesIO(workbook_bytes))
@@ -167,7 +178,7 @@ def main() -> None:
         return
 
     selection_signature = (
-        uploaded.name,
+        workbook_digest,
         sheet_name,
         group_name,
         subgroup_number,
@@ -175,10 +186,6 @@ def main() -> None:
         lower_week_start,
         semester_end,
     )
-    if st.session_state.get("calendar_signature") != selection_signature:
-        st.session_state.pop("calendar_data", None)
-        st.session_state.pop("calendar_name", None)
-
     edited_frame = st.data_editor(
         _preview_frame(lessons, upper_week_start, lower_week_start),
         hide_index=True,
@@ -191,6 +198,11 @@ def main() -> None:
         use_container_width=True,
     )
     edited_lessons = _apply_edits(lessons, edited_frame)
+    calendar_signature = (*selection_signature, _edits_signature(edited_lessons))
+    if st.session_state.get("calendar_signature") != calendar_signature:
+        st.session_state.pop("calendar_data", None)
+        st.session_state.pop("calendar_name", None)
+        st.session_state.pop("calendar_signature", None)
 
     if st.button("Сформировать календарь", type="primary"):
         try:
@@ -202,7 +214,7 @@ def main() -> None:
         else:
             st.session_state["calendar_data"] = calendar.to_ical()
             st.session_state["calendar_name"] = _download_name(group_name, subgroup_number)
-            st.session_state["calendar_signature"] = selection_signature
+            st.session_state["calendar_signature"] = calendar_signature
             st.success("Календарь успешно сформирован.")
 
     if calendar_data := st.session_state.get("calendar_data"):

@@ -49,9 +49,13 @@ def test_calendar_has_required_properties_timezone_recurrence_and_alarms(lesson)
 
 
 def test_uid_is_stable_when_text_changes(lesson):
-    assert stable_uid(lesson) == stable_uid(replace(lesson, subject="Другая дисциплина"))
-    assert stable_uid(lesson) == stable_uid(replace(lesson, location="А-101"))
-    assert stable_uid(lesson) == stable_uid(lesson)
+    autumn = (date(2026, 9, 7), date(2026, 9, 14))
+    spring = (date(2027, 2, 8), date(2027, 2, 15))
+    assert stable_uid(lesson, *autumn) == stable_uid(
+        replace(lesson, subject="Другая дисциплина"), *autumn
+    )
+    assert stable_uid(lesson, *autumn) == stable_uid(replace(lesson, location="А-101"), *autumn)
+    assert stable_uid(lesson, *autumn) != stable_uid(lesson, *spring)
 
 
 def test_empty_location_is_omitted_and_empty_subject_is_skipped(lesson):

@@ -70,17 +70,19 @@ def build_calendar(
         start, end = lesson_datetime(lesson, upper_week_start, lower_week_start)
         if start.date() > semester_end:
             continue
-        _add_event(calendar, lesson, start, end, until)
+        _add_event(calendar, lesson, start, end, until, upper_week_start, lower_week_start)
     return calendar
 
 
-def stable_uid(lesson: Lesson) -> str:
-    """Возвращает стабильный UID слота, независимый от текста предмета и аудитории."""
+def stable_uid(lesson: Lesson, upper_week_start: date, lower_week_start: date) -> str:
+    """Возвращает стабильный UID слота в конкретном семестре без текста занятия."""
 
     slot = "|".join(
         (
             lesson.group_name,
             str(lesson.subgroup_number),
+            upper_week_start.isoformat(),
+            lower_week_start.isoformat(),
             lesson.week_type.value,
             str(lesson.weekday),
             str(lesson.pair_number),
@@ -90,7 +92,13 @@ def stable_uid(lesson: Lesson) -> str:
 
 
 def _add_event(
-    calendar: Calendar, lesson: Lesson, start: datetime, end: datetime, until: datetime
+    calendar: Calendar,
+    lesson: Lesson,
+    start: datetime,
+    end: datetime,
+    until: datetime,
+    upper_week_start: date,
+    lower_week_start: date,
 ) -> None:
     event = Event()
     location = enrich_location(lesson.location)
@@ -100,7 +108,7 @@ def _add_event(
     description_lines.append(lesson.week_type.label)
     description_lines.extend(location.description_lines)
 
-    event.add("uid", stable_uid(lesson))
+    event.add("uid", stable_uid(lesson, upper_week_start, lower_week_start))
     event.add("dtstamp", datetime.now(UTC))
     event.add("dtstart", start)
     event.add("dtend", end)
