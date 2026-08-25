@@ -1,8 +1,37 @@
-*.ipynb
-Other Files
-*.ics
-*.xls
-!template.xls
-.DS_Store
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Tests / tooling
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environment
 .env
-__pycache__
+.env.*
+
+# Generated calendars
+*.ics
+
+# User schedule files
+*.xls
+*.xlsx
+
+# Keep repository fixtures
+!template.xls
+!tests/fixtures/*.xlsx
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
