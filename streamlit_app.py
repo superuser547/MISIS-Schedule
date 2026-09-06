@@ -18,6 +18,7 @@ from misis_schedule.calendar import (
     lesson_datetime,
     validate_semester_dates,
 )
+from misis_schedule.compare import CalendarComparison, CalendarComparisonError, compare_calendars
 from misis_schedule.exceptions import ScheduleParseError
 from misis_schedule.models import Lesson
 from misis_schedule.parser import (
@@ -104,6 +105,39 @@ def _download_name(group_name: str, subgroup_number: int) -> str:
 
     normalized = re.sub(r"[^\w.-]+", "-", group_name, flags=re.UNICODE).strip("-.")
     return f"misis-{normalized or 'schedule'}-subgroup-{subgroup_number}.ics"
+
+
+def _comparison_rows(comparison: CalendarComparison) -> list[dict[str, str]]:
+    """Подготавливает компактное, понятное пользователю представление изменений."""
+
+    labels = {
+        "SUMMARY": "название",
+        "DTSTART": "начало",
+        "DTEND": "окончание",
+        "LOCATION": "аудитория",
+        "DESCRIPTION": "описание",
+        "RRULE": "повторение",
+        "COLOR": "цвет",
+        "VALARM": "напоминания",
+    }
+    status_labels = {"added": "Добавлено", "removed": "Удалено", "modified": "Изменено"}
+    rows = []
+    for event in comparison.events:
+        if event.status == "unchanged":
+            continue
+        details = (
+            ", ".join(labels[field] for field in event.changed_fields)
+            if event.changed_fields
+            else "новое занятие" if event.status == "added" else "занятие удалено"
+        )
+        rows.append(
+            {
+                "Статус": status_labels[event.status],
+                "Занятие": event.summary,
+                "Изменения": details,
+            }
+        )
+    return rows
 
 
 def main() -> None:
@@ -236,6 +270,29 @@ def main() -> None:
             file_name=st.session_state["calendar_name"],
             mime="text/calendar",
         )
+        st.subheader("Сравнить с предыдущим календарём")
+        previous_calendar = st.file_uploader(
+            "Предыдущий календарь (.ics)", type=["ics"], key="previous_calendar_upload"
+        )
+        if st.button("Сравнить", disabled=previous_calendar is None):
+            try:
+                comparison = compare_calendars(previous_calendar.getvalue(), calendar_data)
+            except CalendarComparisonError as exc:
+                st.error(f"Не удалось сравнить календарь: {exc}")
+            else:
+                if not comparison.has_changes:
+                    st.success(
+                        "Расписание не изменилось — повторный импорт календаря не требуется."
+                    )
+                else:
+                    st.info(
+                        "Добавлено занятий: "
+                        f"{len(comparison.added)}; удалено: {len(comparison.removed)}; "
+                        f"изменено: {len(comparison.modified)}."
+                    )
+                    st.dataframe(
+                        _comparison_rows(comparison), hide_index=True, use_container_width=True
+                    )
 
 
 if __name__ == "__main__":
