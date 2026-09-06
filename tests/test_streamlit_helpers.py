@@ -2,8 +2,9 @@ from datetime import time
 
 import pandas as pd
 
+from misis_schedule.compare import CalendarComparison, EventComparison
 from misis_schedule.models import Lesson, WeekType
-from streamlit_app import _apply_edits, _edits_signature
+from streamlit_app import _apply_edits, _comparison_rows, _edits_signature
 
 
 def test_preview_edits_clear_missing_subject_and_change_signature():
@@ -23,3 +24,18 @@ def test_preview_edits_clear_missing_subject_and_change_signature():
     assert edited[0].subject == ""
     assert edited[0].location is None
     assert _edits_signature([lesson]) != _edits_signature(edited)
+
+
+def test_comparison_rows_use_clear_russian_descriptions():
+    comparison = CalendarComparison(
+        (
+            EventComparison("added", "added", "Новое занятие"),
+            EventComparison("modified", "modified", "Математика", ("SUMMARY", "LOCATION")),
+            EventComparison("same", "unchanged", "Без изменений"),
+        )
+    )
+
+    assert _comparison_rows(comparison) == [
+        {"Статус": "Добавлено", "Занятие": "Новое занятие", "Изменения": "новое занятие"},
+        {"Статус": "Изменено", "Занятие": "Математика", "Изменения": "название, аудитория"},
+    ]
