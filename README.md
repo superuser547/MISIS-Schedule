@@ -97,7 +97,7 @@ pytest
 misis_schedule/
   parser.py      # Excel → нормализованные Lesson
   models.py      # Lesson и WeekType
-  rules.py       # правила аудиторий корпуса Б
+  rules.py       # правила аудиторий корпусов Б и Г
   calendar.py    # Lesson + даты семестра → iCalendar
 streamlit_app.py # веб-интерфейс
 generate_schedule.py # необязательный CLI-адаптер
